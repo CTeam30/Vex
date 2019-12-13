@@ -9,5 +9,3 @@ The editors can be downloaded at https://www.vexrobotics.com/vexcode-download. P
  # To download the claw bot graphical and text code please go to:
  https://github.com/CTeam30/Vex_2020/tree/CTeam30-Claw_Bot.
 
-# To view the current status of the clawbot project please go to:
-https://github.com/CTeam30/Vex_2020/projects/1
