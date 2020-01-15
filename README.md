@@ -1,6 +1,6 @@
 # Vex_2020
 
-This is the code for the KCS VEX 2020. Team 1
+This is the code for the KCS VEX 2020, Team 1
 
 It contains both the graphical and text versions of the code.
 
