@@ -246,7 +246,7 @@ void autonomous(void) {
   DriveMove = -600;
   Drive(); 
 
-  TurnMove = 1350;
+  TurnMove = -1500;
   Turn(); 
 
   }
