@@ -194,7 +194,7 @@ void autonomous(void) {
   //ArmMove = 200;
   //Arm();
 
-  TurnMove = -680;
+  TurnMove = -700;
   Turn();
 
   DriveSpeed = 40;
@@ -219,15 +219,15 @@ void autonomous(void) {
 
  // task::sleep(500);
 
-  TurnMove = -130;
-  Turn();
+ // TurnMove = -130;
+ // Turn();
 
   DriveSpeed = 40;
   DriveMove = 100;
   Drive();
 
   DriveSpeed = 40;
-  DriveMove = -200;
+  DriveMove = -100;
   Drive();
 
   ArmMove = -150;
@@ -241,8 +241,8 @@ void autonomous(void) {
 
   task::sleep(500);
 
-  //TurnMove = 350;
-  //Turn();
+  //TurnMove = 50;
+ // Turn();
 
   //DriveSpeed = 40;
   //DriveMove = -400;
