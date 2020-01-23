@@ -216,7 +216,7 @@ void autonomous(void) {
   TurnMove = 1350;
   Turn();  
 
-  DriveSpeed = 50;
+  DriveSpeed = 30;
   DriveMove = 200;
   Drive(); 
 
@@ -226,7 +226,7 @@ void autonomous(void) {
 
   Claw18.spinFor(-200, degrees, true);
 
-  ArmMove = 250;
+  ArmMove = 220; //250 was wrong
   Arm();
 
   TurnMove = 800;

@@ -184,14 +184,14 @@ void autonomous(void) {
   Arm1.setVelocity(40, percent);
   Arm2.setVelocity(40, percent);
 
-  ArmMove = 200;
+  ArmMove = 170;
   Arm();
 
-  TurnMove = 730;
+  TurnMove = 780;
   Turn();
 
   DriveSpeed = 50;
-  DriveMove = 300;
+  DriveMove = 390;
   Drive(); 
 
   ArmMove = -200;
@@ -204,7 +204,7 @@ void autonomous(void) {
   Claw18.spinFor(200, degrees, true);
 
   DriveSpeed = 50;
-  DriveMove = -400;
+  DriveMove = -450;
   Drive(); 
 
   //ArmMove = 300;
@@ -213,20 +213,20 @@ void autonomous(void) {
   //ArmMove = -100;
   //Arm();
 
-  TurnMove = -1350;
+  TurnMove = -1450;
   Turn();  
 
   DriveSpeed = 50;
-  DriveMove = 200;
+  DriveMove = 270;
   Drive(); 
 
   clawbool = true;
 
   Brain.Screen.print(clawbool);
 
-  Claw18.spinFor(-220, degrees, true);
+  Claw18.spinFor(-250, degrees, true);
 
-  ArmMove = 230;
+  ArmMove = 250;
   Arm();
 
   TurnMove = -800;

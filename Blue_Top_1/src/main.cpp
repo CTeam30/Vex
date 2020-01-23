@@ -1,7 +1,7 @@
 /*----------------------------------------------------------------------------*/
 /*                                                                            */
 /*    Module:       main.cpp                                                  */
-/*    Author:       VEX                                                       */
+/*    Author:       Shane Collins Team 1 KCS                                  */
 /*    Created:      Thu Sep 26 2019                                           */
 /*    Description:  Competition Template                                      */
 /*                                                                            */
@@ -18,7 +18,7 @@
 // Arm1                 motor         1               
 // Arm2                 motor         2               
 // ArmExtender19        motor         19              
-// Claw18               motor         18              
+// Claw18               motor         7               
 // ---- END VEXCODE CONFIGURED DEVICES ----
 
 #include "vex.h"
@@ -181,11 +181,10 @@ void autonomous(void) {
 
   wait(0.5, seconds);
 
-
   Arm1.setVelocity(30, percent);
   Arm2.setVelocity(30, percent);
 
-  ArmMove = 360;
+  ArmMove = 330;
   Arm();
 
   DriveSpeed = 40;
@@ -195,18 +194,18 @@ void autonomous(void) {
   //ArmMove = 200;
   //Arm();
 
-  TurnMove = 525;
+  TurnMove = 680;
   Turn();
 
   DriveSpeed = 40;
   DriveMove = 800;
   Drive(); 
 
-  TurnMove = 350;
-  Turn();
+  //TurnMove = 380;
+  //Turn();
 
   DriveSpeed = 40;
-  DriveMove = 200;
+  DriveMove = 250;
   Drive();
 
   //clawbool = false;
@@ -220,28 +219,42 @@ void autonomous(void) {
 
  // task::sleep(500);
 
+  TurnMove = 130;
+  Turn();
+
   DriveSpeed = 40;
   DriveMove = 100;
   Drive();
 
   DriveSpeed = 40;
-  DriveMove = -300;
+  DriveMove = -200;
   Drive();
+
+  ArmMove = -130;
+  Arm();
 
   clawbool = false;
 
   Brain.Screen.print(clawbool);
 
-  Claw18.spinFor(100, degrees, true);
+  Claw18.spinFor(250, degrees, true);
 
   task::sleep(500);
 
-  TurnMove = -550;
+  TurnMove = -100;
   Turn();
 
   DriveSpeed = 40;
   DriveMove = -400;
   Drive();
+
+ // DriveSpeed = 40;
+  //DriveMove = 400;
+  //Drive();
+
+  //DriveSpeed = 40;
+ // DriveMove = -400;
+ // Drive();
 
   ArmMove = -360;
   Arm();
@@ -298,6 +311,7 @@ void usercontrol(void) {
 
   vex::task t1 (ContPrnt);
   vex::task t2 (ContPrntTm);
+  Controller1.rumble(rumbleShort);
 
   while (true) {
       
