@@ -265,27 +265,28 @@ int AdjVel = 1;
 
 int ContPrnt () {
   while (true) {
-    Controller1.Screen.setCursor(1,1);
+    //Controller1.Screen.setCursor(1,1);
     Controller1.Screen.print("Velocity: ");
     Controller1.Screen.print(AdjVel);
     //task::sleep(500);
-    Controller1.Screen.setCursor(3,1);
-    Controller1.Screen.print("Time: ");
-    Controller1.Screen.print(round(Brain.Timer.value()));
-  // task::sleep(500);
-    Controller1.Screen.setCursor(2,1);
-    Controller1.Screen.print("Claw temp: ");
-    Controller1.Screen.print(Claw18.temperature(percent));
+    //Controller1.Screen.setCursor(3,1);
+    //Controller1.Screen.print("Time: ");
+    //Controller1.Screen.print(round(Brain.Timer.value()));
+  // task::sleep(500); */
+    Brain.Screen.setCursor(2,1);
+    Brain.Screen.print("Claw temp: ");
+    Brain.Screen.print(Claw18.temperature(percent));
     /*Controller1.Screen.setCursor(4,1);
     Controller1.Screen.print("Battery: ");
     Controller1.Screen.print(Brain.Battery.current()); */
     task::sleep(200);
-    Controller1.Screen.clearScreen();
+    Brain.Screen.clearLine(2);
+    Controller1.Screen.clearLine(3);
   }
   return(10);
 }
 
-int ContPrntTm () {
+/* int ContPrntTm () {
   while (true) {
     Controller1.Screen.setCursor(3,1);
     Controller1.Screen.print("Time: ");
@@ -294,21 +295,23 @@ int ContPrntTm () {
     Controller1.Screen.clearScreen();
   }
   return(10);
-}
+} */
 
 void usercontrol(void) {
   // User control code here, inside the loop
 
+  int WheelsFailSafe = 0;
   vex::task t1 (ContPrnt);
-  vex::task t2 (ContPrntTm);
+ // vex::task t2 (ContPrntTm);
   Controller1.rumble(rumbleShort);
-
+  
   while (true) {
       
+      if (WheelsFailSafe == 0) {
+        LeftMotorBack5.spin(directionType::fwd, Controller1.Axis4.value() + Controller1.Axis3.value() / AdjVel, velocityUnits::pct); //(Axis3+Axis4)/2;
+        RightMotorBack6.spin(directionType::fwd, Controller1.Axis4.value() - Controller1.Axis3.value() / AdjVel, velocityUnits::pct);//(Axis3-Axis4)/2;
+      }
 
-      LeftMotorBack5.spin(directionType::fwd, Controller1.Axis4.value() + Controller1.Axis3.value() / AdjVel, velocityUnits::pct); //(Axis3+Axis4)/2;
-      RightMotorBack6.spin(directionType::fwd, Controller1.Axis4.value() - Controller1.Axis3.value() / AdjVel, velocityUnits::pct);//(Axis3-Axis4)/2;
-      
       LeftMotorFront20.spin(directionType::fwd, Controller1.Axis4.value() + Controller1.Axis3.value() / AdjVel, velocityUnits::pct); //(Axis3+Axis4)/2;
       RightMotorFront14.spin(directionType::fwd, Controller1.Axis4.value() - Controller1.Axis3.value() / AdjVel, velocityUnits::pct);//(Axis3-Axis4)/2;
       
@@ -321,7 +324,7 @@ void usercontrol(void) {
 
       }
       
-      while ((Controller1.Axis2.value() >= 10)) {
+      if ((Controller1.Axis2.value() >= 10)) {
 
         Arm1.spin(directionType::fwd, Controller1.Axis2.value()/2, velocityUnits::pct);
         Arm2.spin(directionType::fwd, Controller1.Axis2.value()/2, velocityUnits::pct);
@@ -329,7 +332,7 @@ void usercontrol(void) {
 
       }
 
-      while ((Controller1.Axis2.value() <= -10)) { 
+      if ((Controller1.Axis2.value() <= -10)) { 
 
         Arm1.spin(directionType::rev, Controller1.Axis2.value()/2 * -1, velocityUnits::pct);
         Arm2.spin(directionType::rev, Controller1.Axis2.value()/2 * -1, velocityUnits::pct);
@@ -346,14 +349,14 @@ void usercontrol(void) {
 
       }
       
-      while ((Controller1.Axis1.value() >= 10)) {
+      if ((Controller1.Axis1.value() >= 10)) {
 
         ArmExtender19.spin(directionType::fwd, Controller1.Axis1.value()/2, velocityUnits::pct);
        // task::sleep(1);
 
       }
 
-      while ((Controller1.Axis1.value() <= -10)) { 
+      if ((Controller1.Axis1.value() <= -10)) { 
 
         ArmExtender19.spin(directionType::rev, Controller1.Axis1.value()/2 * -1, velocityUnits::pct);
        // task::sleep(1);
@@ -362,18 +365,58 @@ void usercontrol(void) {
 
       if (Controller1.ButtonUp.pressing()) {
         AdjVel = AdjVel - 1;
-       // task::sleep(500);
+        task::sleep(100);
       }
 
       if (Controller1.ButtonDown.pressing()) {
         AdjVel = AdjVel + 1;
-        //task::sleep(500);
+        task::sleep(100);
       }
 
+      if (AdjVel <= 0 ) {
+        AdjVel = 1;
+       // task::sleep(100);
+      }
+
+      if (Controller1.ButtonB.pressing()) {
+        LeftMotorBack5.setVelocity(50, percent);
+        RightMotorBack6.setVelocity(50, percent);
+        LeftMotorFront20.setVelocity(50, percent);
+        RightMotorFront14.setVelocity(50, percent);
+
+        LeftMotorBack5.spinFor(-300, degrees, false);
+        RightMotorBack6.spinFor(300, degrees, false);
+        LeftMotorFront20.spinFor(-300, degrees, false);
+        RightMotorFront14.spinFor(300, degrees, true);
+
+        LeftMotorBack5.setVelocity(100, percent);
+        RightMotorBack6.setVelocity(100, percent);
+        LeftMotorFront20.setVelocity(100, percent);
+        RightMotorFront14.setVelocity(100, percent);
+
+      }
+
+      if (Controller1.ButtonX.pressing()) {
+        WheelsFailSafe = WheelsFailSafe + 1;
+        task::sleep(200);
+      }
+
+      if (WheelsFailSafe >= 2) {
+        WheelsFailSafe = 0;
+      }
+
+      if (WheelsFailSafe == 1) {
+        LeftMotorBack5.setStopping(coast);
+        RightMotorBack6.setStopping(coast);
+      }
+
+      if (WheelsFailSafe != 1) {
+        LeftMotorBack5.setStopping(hold);
+        RightMotorBack6.setStopping(hold);
+      }
      task::sleep(20);
     }
 }
-
 
 //
 // Main will set up the competition functions and callbacks.

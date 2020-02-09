@@ -138,10 +138,14 @@ void Turn() {
   if (TurnMove >= 1) {
     LeftMotorBack5.spinFor(TurnMove, degrees, false);
     LeftMotorFront20.spinFor(TurnMove, degrees, true);
+   // RightMotorBack6.spinFor(TurnMove * -1, degrees, false);
+  //  RightMotorFront14.spinFor(TurnMove * -1, degrees, true); 
   }
   if (TurnMove <= -1) {
     RightMotorBack6.spinFor(TurnMove, degrees, false);
     RightMotorFront14.spinFor(TurnMove, degrees, true); 
+ //   LeftMotorBack5.spinFor(TurnMove * -1, degrees, false);
+  //  LeftMotorFront20.spinFor(TurnMove * -1, degrees, true);
   }
 }
 
@@ -169,103 +173,231 @@ void Drive() {
 
 void autonomous(void) {
 
-  //vex::task t3 (ClawTmStp);
-
   task::sleep(100);
-  //LeftMotorBack5.spinFor(50, degrees, false);
- // RightMotorBack6.spinFor(-50, degrees, false);
-  
+
   Claw18.setTimeout(1, sec);
 
   ClawHold();
 
-  wait(0.5, seconds);
+  wait(0.2, seconds);
 
-  Arm1.setVelocity(30, percent);
-  Arm2.setVelocity(30, percent);
+  Arm1.setVelocity(40, percent);
+  Arm2.setVelocity(40, percent);
 
-  ArmMove = 330;
+  ArmMove = 200;
   Arm();
 
-  DriveSpeed = 40;
-  DriveMove = 300;
-  Drive();
-
-  //ArmMove = 200;
-  //Arm();
-
-  TurnMove = -700;
+  TurnMove = -830;
   Turn();
 
-  DriveSpeed = 40;
-  DriveMove = 800;
+  DriveSpeed = 50;
+  DriveMove = 300;
   Drive(); 
 
-  TurnMove = 100;
+  ArmMove = -200;
+  Arm();
+  
+  clawbool = false;
+
+  Brain.Screen.print(clawbool);
+
+  Claw18.spinFor(200, degrees, true);
+
+  DriveSpeed = 50;
+  DriveMove = -500;
+  Drive(); 
+
+  //ArmMove = 300;
+  //Arm();
+
+  //ArmMove = -100;
+  //Arm();
+
+  TurnMove = 1350;
+  Turn();  
+
+  DriveSpeed = 30;
+  DriveMove = 200;
+  Drive(); 
+
+  clawbool = true;
+
+  Brain.Screen.print(clawbool);
+
+  Claw18.spinFor(-200, degrees, true);
+
+  ArmMove = 220; //250 was wrong
+  Arm();
+
+  TurnMove = 800;
   Turn();
 
-  DriveSpeed = 40;
-  DriveMove = 250;
-  Drive();
-
-  DriveSpeed = 40;
-  DriveMove = -150;
-  Drive();  
-
-  //clawbool = false;
-
-  //Brain.Screen.print(clawbool);
-
-  //Claw18.spinFor(200, degrees, true);
-
-  //ArmMove = -200;
- // Arm();
-
- // task::sleep(500);
-
- // TurnMove = -130;
- // Turn();
-
- /* DriveSpeed = 40;
-  DriveMove = 100;
-  Drive();
-
-  DriveSpeed = 40;
-  DriveMove = -100;
-  Drive();
-*/
-  ArmMove = -150;
-  Arm();
+  DriveSpeed = 50;
+  DriveMove = 600;
+  Drive(); 
 
   clawbool = false;
 
   Brain.Screen.print(clawbool);
 
-  Claw18.spinFor(250, degrees, true);
+  Claw18.spinFor(200, degrees, true);
+
+  DriveSpeed = 50;
+  DriveMove = -400;
+  Drive(); 
+
+  TurnMove = -1350;
+  Turn(); 
+
+  ArmMove = -220; 
+  Arm();
+
+  DriveSpeed = 50;
+  DriveMove = -250;
+  Drive();
+
+  task::sleep(100);
+
+  DriveSpeed = 50;
+  DriveMove = 700;
+  Drive();
+
+  TurnMove = 100;
+  Turn();
+
+  DriveSpeed = 50;
+  DriveMove = 100;
+  Drive();
+
+  clawbool = true;
+
+  Brain.Screen.print(clawbool);
+
+  Claw18.spinFor(-230, degrees, true);
+
+  TurnMove = 230;
+  Turn();
+
+  clawbool = true;
+
+  Brain.Screen.print(clawbool);
+
+  Claw18.spinFor(-230, degrees, true);
+
+  ArmMove = 200; 
+  Arm();
+
+  DriveSpeed = 50;
+  DriveMove = 600;
+  Drive();
+
+  ArmMove = 400; 
+  Arm();
+
+  TurnMove = -880;
+  Turn();
+
+  DriveSpeed = 50;
+  DriveMove = 500;
+  Drive();
+
+  task::sleep(300);
+
+  TurnMove = 150;
+  Turn();
+
+  DriveSpeed = 20;
+  DriveMove = -150;
+  Drive();
+
+ // ArmExtender19.spinFor(100, degrees, true);
 
   task::sleep(500);
 
-  //TurnMove = 50;
- // Turn();
+  clawbool = false;
 
-  //DriveSpeed = 40;
-  //DriveMove = -400;
-  //Drive();
+  Brain.Screen.print(clawbool);
 
-  DriveSpeed = 40;
-  DriveMove = -200;
+  Claw18.spinFor(200, degrees, true);
+
+  DriveSpeed = 50;
+  DriveMove = -300;
   Drive();
 
-  //DriveSpeed = 40;
-  //DriveMove = 300;
-  //Drive();
+  //ArmExtender19.spinFor(-100, degrees, true);
 
-  DriveSpeed = 40;
+  TurnMove = 250;
+  Turn();
+
+  ArmMove = -100; 
+  Arm();
+
+  DriveSpeed = 70;
+  DriveMove = 1450;
+  Drive();
+
+  DriveSpeed = 50;
+  DriveMove = 0;
+  Drive();
+
+  TurnMove = -246;
+  Turn();
+
+  DriveSpeed = 50;
+  DriveMove = 1400;
+  Drive();
+
+  //TurnMove = 350;
+  //Turn();
+
+  DriveSpeed = 50;
   DriveMove = -400;
   Drive();
 
-  ArmMove = -300;
+  ArmMove = -450; 
   Arm();
+
+  //DriveSpeed = 50;
+ // DriveMove = 400;
+  //Drive();
+
+  //Spin to pick up cube for red tower
+
+  TurnMove = -1250;
+  Turn(); 
+
+  DriveSpeed = 50;
+  DriveMove = 300;
+  Drive();
+
+  clawbool = true;
+
+  Brain.Screen.print(clawbool);
+
+  Claw18.spinFor(-250, degrees, true);
+
+  TurnMove = 1526;
+  Turn(); 
+
+  ArmMove = 450; 
+  Arm();
+
+  DriveSpeed = 50;
+  DriveMove = 600;
+  Drive();
+
+  TurnMove = -525;
+  Turn();
+
+  DriveSpeed = 50;
+  DriveMove = 300;
+  Drive();
+
+  clawbool = false;
+
+  Brain.Screen.print(clawbool);
+
+  Claw18.spinFor(200, degrees, true);
 
   }
 
@@ -318,18 +450,16 @@ int ContPrnt () {
 void usercontrol(void) {
   // User control code here, inside the loop
 
-  int WheelsFailSafe = 0;
   vex::task t1 (ContPrnt);
  // vex::task t2 (ContPrntTm);
   Controller1.rumble(rumbleShort);
   
   while (true) {
       
-      if (WheelsFailSafe == 0) {
-        LeftMotorBack5.spin(directionType::fwd, Controller1.Axis4.value() + Controller1.Axis3.value() / AdjVel, velocityUnits::pct); //(Axis3+Axis4)/2;
-        RightMotorBack6.spin(directionType::fwd, Controller1.Axis4.value() - Controller1.Axis3.value() / AdjVel, velocityUnits::pct);//(Axis3-Axis4)/2;
-      }
 
+      LeftMotorBack5.spin(directionType::fwd, Controller1.Axis4.value() + Controller1.Axis3.value() / AdjVel, velocityUnits::pct); //(Axis3+Axis4)/2;
+      RightMotorBack6.spin(directionType::fwd, Controller1.Axis4.value() - Controller1.Axis3.value() / AdjVel, velocityUnits::pct);//(Axis3-Axis4)/2;
+      
       LeftMotorFront20.spin(directionType::fwd, Controller1.Axis4.value() + Controller1.Axis3.value() / AdjVel, velocityUnits::pct); //(Axis3+Axis4)/2;
       RightMotorFront14.spin(directionType::fwd, Controller1.Axis4.value() - Controller1.Axis3.value() / AdjVel, velocityUnits::pct);//(Axis3-Axis4)/2;
       
@@ -396,42 +526,6 @@ void usercontrol(void) {
        // task::sleep(100);
       }
 
-      if (Controller1.ButtonB.pressing()) {
-        LeftMotorBack5.setVelocity(50, percent);
-        RightMotorBack6.setVelocity(50, percent);
-        LeftMotorFront20.setVelocity(50, percent);
-        RightMotorFront14.setVelocity(50, percent);
-
-        LeftMotorBack5.spinFor(-300, degrees, false);
-        RightMotorBack6.spinFor(300, degrees, false);
-        LeftMotorFront20.spinFor(-300, degrees, false);
-        RightMotorFront14.spinFor(300, degrees, true);
-
-        LeftMotorBack5.setVelocity(100, percent);
-        RightMotorBack6.setVelocity(100, percent);
-        LeftMotorFront20.setVelocity(100, percent);
-        RightMotorFront14.setVelocity(100, percent);
-
-      }
-
-      if (Controller1.ButtonX.pressing()) {
-        WheelsFailSafe = WheelsFailSafe + 1;
-        task::sleep(200);
-      }
-
-      if (WheelsFailSafe >= 2) {
-        WheelsFailSafe = 0;
-      }
-
-      if (WheelsFailSafe == 1) {
-        LeftMotorBack5.setStopping(coast);
-        RightMotorBack6.setStopping(coast);
-      }
-
-      if (WheelsFailSafe != 1) {
-        LeftMotorBack5.setStopping(hold);
-        RightMotorBack6.setStopping(hold);
-      }
      task::sleep(20);
     }
 }

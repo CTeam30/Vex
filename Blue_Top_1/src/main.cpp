@@ -256,7 +256,7 @@ void autonomous(void) {
  // DriveMove = -400;
  // Drive();
 
-  ArmMove = -360;
+  ArmMove = -300;
   Arm();
 
   }
