@@ -12,13 +12,13 @@
 // [Name]               [Type]        [Port(s)]
 // Controller1          controller                    
 // LeftMotorBack5       motor         5               
-// RightMotorBack6      motor         6               
+// RightMotorBack6      motor         17              
 // LeftMotorFront20     motor         20              
 // RightMotorFront14    motor         13              
-// Arm1                 motor         1               
+// Arm1                 motor         4               
 // Arm2                 motor         2               
-// ArmExtender19        motor         19              
-// Claw18               motor         7               
+// ArmExtender19        motor         14              
+// Claw18               motor         15              
 // ---- END VEXCODE CONFIGURED DEVICES ----
 
 #include "vex.h"
@@ -201,7 +201,7 @@ void autonomous(void) {
   DriveMove = 800;
   Drive(); 
 
-  TurnMove = -200;
+  TurnMove = -50;
   Turn();
 
   DriveSpeed = 40;
@@ -227,11 +227,11 @@ void autonomous(void) {
   Drive();
 
   DriveSpeed = 40;
-  DriveMove = -200;
+  DriveMove = -100;
   Drive();
 
-  ArmMove = -130;
-  Arm();
+ // ArmMove = -130;
+ // Arm();
 
   clawbool = false;
 

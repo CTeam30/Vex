@@ -16,8 +16,8 @@
 // RightMotorFront14    motor         13              
 // Arm1                 motor         1               
 // Arm2                 motor         2               
-// ArmExtender19        motor         19              
-// Claw18               motor         7               
+// ArmExtender19        motor         14              
+// Claw18               motor         3               
 // Controller1          controller                    
 // ---- END VEXCODE CONFIGURED DEVICES ----
 

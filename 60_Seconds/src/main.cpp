@@ -17,8 +17,9 @@
 // Arm1                 motor         1               
 // Arm2                 motor         2               
 // ArmExtender19        motor         19              
-// Claw18               motor         7               
+// Claw18               motor         10              
 // Controller1          controller                    
+// Inertial11           inertial      11              
 // ---- END VEXCODE CONFIGURED DEVICES ----
 
 #include "vex.h"
@@ -47,6 +48,8 @@ void pre_auton(void) {
   // All activities that occur before the competition starts
   // Example: clearing encoders, setting servo positions, ...
 
+
+  Inertial11.calibrate();
   Arm1.setStopping(hold);
   Arm2.setStopping(hold);
   ArmExtender19.setStopping(hold);
@@ -170,8 +173,43 @@ void Drive() {
   RightMotorFront14.spinFor(DriveMove * -1, degrees, true);
 }
 
+int AutonSpeed = 50;
+int AutonDegrees = 45;
+
+void AutonTurn () {
+  while(true) {
+    LeftMotorBack5.setVelocity(Speed, pct);
+    LeftMotorFront20.setVelocity(Speed, pct);
+    RightMotorBack6.setVelocity(Speed, pct);
+    RightMotorFront14.setVelocity(Speed, pct);  
+
+    AutonSpeed = (Inertial11.heading(degrees) - AutonDegrees) * -1;
+
+    LeftMotorBack5.spin(reverse);
+    LeftMotorFront20.spin(reverse);
+    RightMotorBack6.spin(forward);
+    RightMotorFront14.spin(forward);
+
+    if (AutonSpeed <= 1){
+      LeftMotorBack5.stop();
+      LeftMotorFront20.stop();
+      RightMotorBack6.stop();
+      RightMotorFront14.stop();
+      break;
+    }
+
+    if(AutonSpeed <= 20) {
+      AutonSpeed = 20;
+    }
+  }
+
+}
+
+
 
 void autonomous(void) {
+
+  Inertial11.setHeading(0, degrees);
 
   task::sleep(100);
 
@@ -252,18 +290,19 @@ void autonomous(void) {
   ArmMove = -220; 
   Arm();
 
-  DriveSpeed = 50;
-  DriveMove = -250;
-  Drive();
+  //DriveSpeed = 50;
+  //DriveMove = -250;
+//  Drive();
+
 
   task::sleep(100);
 
   DriveSpeed = 50;
-  DriveMove = 700;
+  DriveMove = 500;
   Drive();
 
-  TurnMove = 100;
-  Turn();
+  //TurnMove = 100;
+  //Turn();
 
   DriveSpeed = 50;
   DriveMove = 100;
@@ -278,24 +317,34 @@ void autonomous(void) {
   TurnMove = 230;
   Turn();
 
+  clawbool = false;
+
+  Brain.Screen.print(clawbool);
+
+  Claw18.spinFor(200, degrees, true);
+
+  DriveSpeed = 20;
+  DriveMove = 200;
+  Drive();
+
   clawbool = true;
 
   Brain.Screen.print(clawbool);
 
   Claw18.spinFor(-230, degrees, true);
 
-  ArmMove = 200; 
+  ArmMove = 550; 
   Arm();
 
   DriveSpeed = 50;
-  DriveMove = 600;
+  DriveMove = 250;
   Drive();
 
-  ArmMove = 400; 
-  Arm();
-
-  TurnMove = -880;
+  TurnMove = -750;
   Turn();
+
+  ArmMove = 100; 
+  Arm();
 
   DriveSpeed = 50;
   DriveMove = 500;
@@ -324,22 +373,92 @@ void autonomous(void) {
   DriveMove = -300;
   Drive();
 
-  //ArmExtender19.spinFor(-100, degrees, true);
-
-  TurnMove = 250;
+  TurnMove = -1200;
   Turn();
+
+  //DriveSpeed = 50;
+  //DriveMove = -200;
+  //Drive();
+
+//  AutonDegrees = 160;
+ // AutonTurn();
+
+  DriveSpeed = 50;
+  DriveMove = 1500;
+  Drive();
+
+  TurnMove = 200;
+  Turn();
+
+  DriveSpeed = 50;
+  DriveMove = 2000;
+  Drive();
+
+  task::sleep(1000);
+
+  DriveSpeed = 50;
+  DriveMove = -1000;
+  Drive();
+
+  //ArmExtender19.spinFor(-100, degrees, true);
+/*
+  //Inertial11.setHeading(0, degrees);
+  AutonDegrees = 45;
+  AutonTurn();
+  
 
   ArmMove = -100; 
   Arm();
 
+
+  //Inertial11.setHeading(0, degrees);
   DriveSpeed = 70;
-  DriveMove = 1450;
+  DriveMove = 2500;
   Drive();
 
   DriveSpeed = 50;
   DriveMove = 0;
   Drive();
 
+  DriveSpeed = 50;
+  DriveMove = -100;
+  Drive();
+
+  //Inertial11.setHeading(0, degrees);
+  AutonDegrees = 90;
+  AutonTurn();
+
+  ArmMove = -250; 
+  Arm();
+
+  //Inertial11.setHeading(0, degrees);
+  DriveSpeed = 50;
+  DriveMove = 8000;
+  Drive();
+
+  clawbool = true;
+
+  Brain.Screen.print(clawbool);
+
+  Claw18.spinFor(-230, degrees, true);
+
+  DriveSpeed = 50;
+  DriveMove = -200;
+  Drive();
+
+  ArmMove = 450; 
+  Arm();
+
+  DriveSpeed = 50;
+  DriveMove = 200;
+  Drive();
+
+  clawbool = false;
+
+  Brain.Screen.print(clawbool);
+
+  Claw18.spinFor(230, degrees, true); */
+/*
   TurnMove = -246;
   Turn();
 
@@ -398,7 +517,7 @@ void autonomous(void) {
   Brain.Screen.print(clawbool);
 
   Claw18.spinFor(200, degrees, true);
-
+*/ 
   }
 
 

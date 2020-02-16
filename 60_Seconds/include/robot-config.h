@@ -12,6 +12,7 @@ extern motor Arm2;
 extern motor ArmExtender19;
 extern motor Claw18;
 extern controller Controller1;
+extern inertial Inertial11;
 
 /**
  * Used to initialize code/tasks/devices added using tools in VEXcode Text.
